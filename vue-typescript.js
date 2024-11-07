@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import { Babel } from 'meteor/babel-compiler';
 import TypeScriptCompiler from './compiler';
 
@@ -7,10 +6,10 @@ const compiler = new TypeScriptCompiler(fallbackCacheDirectory);
 
 global.vue = global.vue || {};
 global.vue.lang = global.vue.lang || {};
-global.vue.lang.typescript = Meteor.wrapAsync(typescriptHandler);
+global.vue.lang.typescript = typescriptHandler;
 global.vue.lang.ts = global.vue.lang.typescript;
 
-function typescriptHandler({ source, inputFile, cacheDirectory = null }, cb) {
+function typescriptHandler({ source, inputFile, cacheDirectory = null }) {
   try {
     if (cacheDirectory) {
       compiler.setDiskCacheDirectory(cacheDirectory);
@@ -18,12 +17,12 @@ function typescriptHandler({ source, inputFile, cacheDirectory = null }, cb) {
     
     const result = compiler.processOneFileForTarget(inputFile, source);
   
-    cb(null, {
+   return {
       script: result.data,
       map: result.sourceMap,
       useBabel: true,
-    });
+    };
   } catch (err) {
-    cb(err);
+    console.error(err);
   }
 }

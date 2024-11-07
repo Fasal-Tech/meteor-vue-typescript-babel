@@ -1,6 +1,6 @@
 Package.describe({
   name: 'mrspark:vue-typescript-babel',
-  version: '1.0.0',
+  version: '1.0.1',
   summary: 'Add typescript support for vue components',
   git: 'https://github.com/nathantreid/meteor-vue-typescript-babel',
   documentation: 'README.md'
@@ -21,5 +21,5 @@ Package.registerBuildPlugin({
 Package.onUse(function(api) {
   api.versionsFrom('3.0.4');
   api.use('isobuild:compiler-plugin@1.0.0');
-  api.use('mrspark:npm-check@1.0.0');
+  api.use('mrspark:npm-check@1.0.1');
 });
